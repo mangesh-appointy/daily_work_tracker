@@ -1,0 +1,240 @@
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header-left h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.current-date {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.btn-logout {
+    background: rgba(255, 100, 100, 0.1);
+    color: #d64d4d;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-logout:hover {
+    background: rgba(255, 100, 100, 0.2);
+}
+
+.stats-bar {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.tracker-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.tracker-table th {
+    text-align: left;
+    padding: 1rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tracker-table td {
+    padding: 0.75rem 1rem;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.tracker-table td.cell-actions {
+    vertical-align: middle;
+}
+
+.tracker-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Row Styling */
+.row-weekend {
+    background-color: var(--color-weekend);
+}
+
+.row-leave {
+    background-color: var(--color-leave);
+    opacity: 0.8;
+}
+
+.cell-date,
+.cell-day {
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+    position: relative;
+    transition: background 0.2s;
+}
+
+.clickable-date {
+    cursor: pointer;
+}
+
+.clickable-date:hover {
+    background: transparent;
+    transform: none;
+    font-weight: normal;
+}
+
+.clickable-date:hover .date-content span {
+    /* Keep color inherited (white) for readability */
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Ensure the add button doesn't get weird inherited styles or text decoration */
+.clickable-date:hover .btn-add-task {
+    text-decoration: none;
+    font-weight: normal;
+    color: white;
+    text-shadow: none;
+}
+
+/* Flex container for the date cell content to align button */
+.date-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    /* space between date and button */
+}
+
+/* Grouping borders */
+.tracker-table .group-cell {
+    background: rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1) !important;
+    vertical-align: middle !important;
+    padding-top: 0.75rem;
+}
+
+/* Ensure inner rows have lighter borders */
+.tracker-table tr:not(:last-child) td:not(.group-cell) {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+/* Last row of a group should match the group border */
+.tracker-table tr[data-last-task="true"] td {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs */
+.task-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid transparent;
+    background: transparent;
+    transition: all 0.2s;
+}
+
+.task-input:focus {
+    background: white;
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    color: #333;
+    /* Dark text for white background */
+}
+
+.hours-input {
+    width: 60px;
+    text-align: center;
+    background: transparent;
+    padding: 0.5rem;
+}
+
+.hours-input:focus {
+    background: white;
+    color: #333;
+}
+
+/* Buttons */
+.btn-add-task {
+    /* No longer absolute, now inline flex item */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    line-height: 1;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: none;
+    padding: 0;
+    /* reset */
+    flex-shrink: 0;
+    /* prevent shrinking */
+}
+
+.cell-date:hover .btn-add-task {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.btn-remove-task {
+    color: #ff6b6b;
+    background: none;
+    font-size: 1.2rem;
+    opacity: 0.3;
+    padding: 0 0.5rem;
+}
+
+.btn-remove-task:hover {
+    opacity: 1;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 4px;
+}
+
+.btn-leave {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    background: white;
+    border: 1px solid #ddd;
+    color: var(--color-text-muted);
+    width: 100%;
+}
+
+.btn-leave:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.btn-leave.active {
+    background: #ffecb3;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+.weekend-badge {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    display: block;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0;
+    border-radius: 4px;
+}
