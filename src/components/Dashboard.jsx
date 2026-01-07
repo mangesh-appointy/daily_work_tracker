@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TimesheetTable from './TimesheetTable';
 import MiniCalendar from './MiniCalendar';
 
@@ -41,10 +41,56 @@ export default function Dashboard({ user, onLogout, theme, onToggleTheme }) {
     setViewMode('day');
   };
 
-  const formattedDate = currentDate.toLocaleString('default', {
-    month: 'long',
-    year: 'numeric'
-  });
+  // Dynamic date display based on view mode
+  const getDisplayDate = () => {
+    const today = getNormalizedDate(new Date());
+    const isToday = currentDate.getTime() === today.getTime();
+
+    // If in day view and it's today, show "Today"
+    if (viewMode === 'day' && isToday) {
+      return currentDate.toLocaleDateString('default', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    }
+
+    // Day view: show selected date
+    if (viewMode === 'day') {
+      return currentDate.toLocaleDateString('default', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    }
+
+    // Week view: show week range
+    if (viewMode === 'week') {
+      const weekStart = new Date(currentDate);
+      const day = weekStart.getDay();
+      const diff = weekStart.getDate() - day + (day === 0 ? -6 : 1); // Monday as first day
+      weekStart.setDate(diff);
+
+      const weekEnd = new Date(weekStart);
+      weekEnd.setDate(weekStart.getDate() + 6);
+
+      const startStr = weekStart.toLocaleDateString('default', { month: 'short', day: 'numeric' });
+      const endStr = weekEnd.toLocaleDateString('default', { month: 'short', day: 'numeric', year: 'numeric' });
+
+      return `${startStr} - ${endStr}`;
+    }
+
+    // Month view: show month and year
+    return currentDate.toLocaleString('default', {
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  // Close calendar when view mode changes
+  useEffect(() => {
+    setShowCalendar(false);
+  }, [viewMode]);
 
   return (
     <div className="dashboard">
@@ -64,7 +110,7 @@ export default function Dashboard({ user, onLogout, theme, onToggleTheme }) {
 
               <div className="date-display-wrapper">
                 <span onClick={() => setShowCalendar(!showCalendar)} className="date-trigger">
-                  {formattedDate}
+                  {getDisplayDate()}
                 </span>
                 {showCalendar && (
                   <MiniCalendar
