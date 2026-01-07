@@ -1,27 +1,27 @@
 :root {
-  /* Premium Color Palette (HSL for easy manipulation) */
-  --hue-primary: 210;
-  /* Blue-ish */
-  --hue-accent: 260;
-  /* Purple-ish */
+  /* Deep Black High-Tech Theme */
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-text-muted: #a0a0a0;
 
-  --color-bg: hsl(220, 20%, 97%);
-  --color-text: hsl(220, 15%, 15%);
-  --color-text-muted: hsl(220, 10%, 40%);
+  /* Vibrant Glow Colors */
+  --glow-blue: rgba(0, 112, 243, 0.4);
+  --glow-purple: rgba(138, 43, 226, 0.3);
+  --glow-green: rgba(0, 255, 127, 0.3);
 
-  --color-primary: hsl(var(--hue-primary), 90%, 55%);
-  --color-primary-hover: hsl(var(--hue-primary), 90%, 45%);
+  /* Primary Colors */
+  --color-primary: #0070f3;
+  --color-primary-hover: #0051cc;
 
   /* Glassmorphism Components */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-  --blur-amount: 10px;
+  --glass-bg: rgba(20, 20, 20, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 0 40px rgba(0, 112, 243, 0.15);
+  --blur-amount: 20px;
 
   /* Status Colors */
-  --color-weekend: hsla(0, 80%, 96%, 0.8);
-  --color-leave: hsla(0, 80%, 96%, 0.8);
-  /* Same as weekend */
+  --color-weekend: rgba(40, 40, 40, 0.8);
+  --color-leave: rgba(40, 40, 40, 0.8);
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -32,42 +32,42 @@
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-[data-theme='dark'] {
-  --color-bg: hsl(220, 20%, 10%);
-  --color-text: hsl(220, 15%, 90%);
-  --color-text-muted: hsl(220, 10%, 65%);
-
-  --glass-bg: rgba(20, 25, 40, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-
-  --color-weekend: hsla(220, 20%, 15%, 0.8);
-  --color-leave: hsla(220, 20%, 15%, 0.8);
-}
-
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--color-bg);
+  background: #000000;
   color: var(--color-text);
-  /* Dynamic Background */
-  background:
-    radial-gradient(at 40% 20%, hsla(28, 100%, 74%, 0.2) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.2) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 0.2) 0px, transparent 50%),
-    radial-gradient(at 80% 50%, hsla(340, 100%, 76%, 0.2) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, hsla(22, 100%, 77%, 0.2) 0px, transparent 50%),
-    radial-gradient(at 80% 100%, hsla(242, 100%, 70%, 0.2) 0px, transparent 50%),
-    radial-gradient(at 0% 0%, hsla(343, 100%, 76%, 0.2) 0px, transparent 50%);
-  background-size: 200% 200%;
-  animation: gradient-move 20s ease infinite;
+  position: relative;
+  overflow-x: hidden;
 }
 
-[data-theme='dark'] body {
+/* Vibrant Glow Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
   background:
-    radial-gradient(at 40% 20%, hsla(225, 40%, 20%, 1) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, hsla(260, 40%, 20%, 1) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, hsla(200, 40%, 20%, 1) 0px, transparent 50%);
+    radial-gradient(circle at 20% 30%, var(--glow-blue) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--glow-purple) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, var(--glow-green) 0%, transparent 60%);
+  opacity: 0.3;
+  z-index: -1;
+  animation: glow-pulse 15s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
 }
 
 @keyframes gradient-move {
@@ -109,8 +109,7 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(var(--hue-primary), 0.5);
-  /* simplified */
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.3);
 }
 
 /* Glass Card Utility */
@@ -119,8 +118,10 @@ textarea:focus {
   backdrop-filter: blur(var(--blur-amount));
   -webkit-backdrop-filter: blur(var(--blur-amount));
   border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  border-radius: 16px;
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
   padding: var(--spacing-md);
 }
 
@@ -160,8 +161,10 @@ textarea:focus {
 .welcome-text {
   margin: 0;
   font-size: 1.25rem;
-  font-weight: 600;
-  background: linear-gradient(135deg, var(--color-primary), #a855f7);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #0070f3, #a855f7);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -171,16 +174,11 @@ textarea:focus {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(20, 20, 20, 0.5);
   padding: 4px;
   border-radius: 99px;
-  /* Pill shape */
   border: 1px solid var(--glass-border);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-[data-theme='dark'] .nav-group {
-  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 112, 243, 0.1);
 }
 
 .date-display-wrapper {
@@ -199,7 +197,7 @@ textarea:focus {
 }
 
 .date-trigger:hover {
-  background: rgba(var(--hue-primary), 0.1);
+  background: rgba(0, 112, 243, 0.1);
   color: var(--color-primary);
 }
 
@@ -227,7 +225,7 @@ textarea:focus {
 }
 
 .btn-icon:hover {
-  background: rgba(var(--hue-primary), 0.1);
+  background: rgba(0, 112, 243, 0.15);
   color: var(--color-primary);
   transform: translateY(-1px);
 }
@@ -248,21 +246,18 @@ textarea:focus {
 }
 
 .btn-text:hover {
-  background-color: var(--color-bg);
+  background-color: rgba(20, 20, 20, 0.8);
   color: var(--color-primary);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 10px rgba(0, 112, 243, 0.2);
 }
 
 /* View Switcher */
 .view-toggle-group {
   display: flex;
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(20, 20, 20, 0.5);
   padding: 4px;
   border-radius: 12px;
-}
-
-[data-theme='dark'] .view-toggle-group {
-  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
 }
 
 .view-btn {
@@ -273,9 +268,9 @@ textarea:focus {
 }
 
 .view-btn.active {
-  background: var(--color-bg);
+  background: rgba(0, 112, 243, 0.2);
   color: var(--color-primary);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 112, 243, 0.3);
   font-weight: 600;
 }
 
@@ -504,33 +499,57 @@ textarea:focus {
 .auth-input {
   width: 100%;
   box-sizing: border-box;
-  /* Fix overflow */
   padding: 0.8rem 1rem;
   margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  /* Subtle default */
+  background: rgba(30, 30, 30, 0.5);
   border: 1px solid var(--glass-border);
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1rem;
   color: var(--color-text);
   transition: all 0.2s ease;
 }
 
 .auth-input:focus {
-  background: white;
+  background: rgba(30, 30, 30, 0.8);
   border-color: var(--color-primary);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(var(--hue-primary), 0.1);
-  color: #333;
-  /* Ensure dark text on white focus background */
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.2);
+  color: var(--color-text);
 }
 
 .auth-message {
   margin-bottom: 1rem;
   padding: 0.8rem;
-  border-radius: 8px;
-  background: rgba(var(--hue-primary), 0.1);
+  border-radius: 12px;
+  background: rgba(0, 112, 243, 0.1);
   color: var(--color-primary);
   font-size: 0.9rem;
   text-align: center;
+}
+
+/* Primary Button (Auth, Forms) */
+.btn-primary {
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0070f3, #00a8ff);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 112, 243, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(0, 112, 243, 0.5);
+  background: linear-gradient(135deg, #0051cc, #0088cc);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
 }

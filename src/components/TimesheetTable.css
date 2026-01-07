@@ -48,13 +48,13 @@
     padding: 1rem;
     color: var(--color-text-muted);
     font-weight: 600;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .tracker-table td {
     padding: 0.75rem 1rem;
     vertical-align: top;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .tracker-table td.cell-actions {
@@ -120,20 +120,20 @@
 
 /* Grouping borders */
 .tracker-table .group-cell {
-    background: rgba(255, 255, 255, 0.3);
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1) !important;
+    background: rgba(20, 20, 20, 0.5);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
     vertical-align: middle !important;
     padding-top: 0.75rem;
 }
 
 /* Ensure inner rows have lighter borders */
 .tracker-table tr:not(:last-child) td:not(.group-cell) {
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
 }
 
 /* Last row of a group should match the group border */
 .tracker-table tr[data-last-task="true"] td {
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Inputs */
@@ -146,11 +146,10 @@
 }
 
 .task-input:focus {
-    background: white;
+    background: rgba(30, 30, 30, 0.8);
     border-color: var(--color-primary);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    color: #333;
-    /* Dark text for white background */
+    box-shadow: 0 0 10px rgba(0, 112, 243, 0.2);
+    color: var(--color-text);
 }
 
 .hours-input {
@@ -161,8 +160,8 @@
 }
 
 .hours-input:focus {
-    background: white;
-    color: #333;
+    background: rgba(30, 30, 30, 0.8);
+    color: var(--color-text);
 }
 
 /* Buttons */
@@ -211,8 +210,8 @@
     font-size: 0.75rem;
     padding: 0.3rem 0.6rem;
     border-radius: 6px;
-    background: white;
-    border: 1px solid #ddd;
+    background: rgba(30, 30, 30, 0.5);
+    border: 1px solid var(--glass-border);
     color: var(--color-text-muted);
     width: 100%;
 }
@@ -223,9 +222,9 @@
 }
 
 .btn-leave.active {
-    background: #ffecb3;
+    background: rgba(255, 193, 7, 0.2);
     border-color: #ffc107;
-    color: #856404;
+    color: #ffc107;
 }
 
 .weekend-badge {
@@ -234,7 +233,7 @@
     font-weight: 500;
     display: block;
     text-align: center;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(20, 20, 20, 0.5);
     padding: 0.2rem 0;
     border-radius: 4px;
 }

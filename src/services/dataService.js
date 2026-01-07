@@ -14,6 +14,22 @@ export const dataService = {
         return { data, error };
     },
 
+    async signUpWithPassword(email, password) {
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+        });
+        return { data, error };
+    },
+
+    async signInWithPassword(email, password) {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        });
+        return { data, error };
+    },
+
     async signOut() {
         const { error } = await supabase.auth.signOut();
         return { error };
